@@ -1,0 +1,46 @@
+# Backend: Le dice al CMS cómo conectarse a tu repositorio.
+# git-gateway es el puente mágico que usa Netlify Identity para que tus clientes
+# puedan guardar cambios sin necesitar una cuenta de GitHub.
+backend:
+  name: git-gateway
+  branch: main # O la rama que uses, ej: master
+
+# OJO: He eliminado "local_backend: true". Esa línea solo sirve para hacer
+# pruebas en local y debe quitarse para que se conecte correctamente a Netlify.
+
+# Media: Define dónde se subirán las imágenes que tus clientes añadan.
+# Es buena práctica tener una carpeta específica para los productos.
+media_folder: "src/assets/images/products"
+public_folder: "/assets/images/products"
+
+# Collections: Define el contenido que tu cliente puede editar.
+collections:
+  - name: "products"
+    label: "Productos" # Cambiado a español para el cliente
+    folder: "src/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nombre del Producto", name: "title", widget: "string" }
+      - { label: "Descripción", name: "body", widget: "markdown" }
+      # MEJORA: Cambiado a "number" para asegurar que solo se introduzcan números.
+      # value_type: "float" permite decimales.
+      - { label: "Precio", name: "price", widget: "number", value_type: "float", min: 0 }
+
+      # MEJORA: La galería es más potente. He añadido un campo "alt" para el
+      # texto alternativo de las imágenes, muy importante para el SEO.
+      - label: "Galería de Fotos del Producto"
+        name: "images"
+        widget: "list"
+        fields:
+          - { label: "Imagen", name: "image", widget: "image" }
+          - { label: "Texto Alternativo (Descripción para SEO)", name: "alt", widget: "string" }
+
+      # MEJORA: Estos campos son técnicos. Los ocultamos del cliente
+      # para evitar confusiones. Se añadirán automáticamente a cada producto.
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/product.njk" }
+      - { label: "Permalink", name: "permalink", widget: "hidden", default: "/products/{{slug}}/" }
+
+      # NOTA: He eliminado el campo "Single Image (Legacy)". La galería de imágenes
+      # ya cumple esa función y simplifica el formulario para el cliente.
+      # Si la necesitas por alguna razón, puedes volver a añadirla.

@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+---
+<article class="product-detail">
+  {% if images and images.length > 0 %}
+    <div class="product-gallery" data-image-count="{{ images.length }}">
+      {% for image in images %}
+        <div class="gallery-item">
+          <img class="product-detail__img" src="{{ image }}" alt="{{ title }} - Imagen {{ loop.index }}">
+        </div>
+      {% endfor %}
+    </div>
+  {% elif image %}
+    <img class="product-detail__img" src="{{ image }}" alt="{{ title }}">
+  {% endif %}
+
+  <h1 class="product-detail__title">{{ title }}</h1>
+
+  {% if price %}
+    <p class="product-detail__price">{{ price }}</p>
+  {% endif %}
+
+  <div class="product-detail__content">
+    {{ content | safe }}
+  </div>
+
+  <p>
+    <a class="btn-whatsapp" href="https://wa.me/16263941200" target="_blank" rel="noopener">
+      Comprar por WhatsApp
+    </a>
+  </p>
+</article>
