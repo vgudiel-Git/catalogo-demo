@@ -6,8 +6,12 @@ layout: layouts/base.njk
 <section class="product-grid">
   {% for product in collections.products %}
     {% set thumb = null %}
+
+    {# If the product has a gallery, use the first image #}
     {% if product.data.images and product.data.images | length > 0 %}
       {% set thumb = product.data.images[0] %}
+    {% elseif product.data.image %}
+      {% set thumb = { "image": product.data.image, "alt": product.data.title } %}
     {% endif %}
 
     <div class="product-card">
