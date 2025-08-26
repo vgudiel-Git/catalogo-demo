@@ -9,14 +9,14 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/products/*.md");
   });
 
-  // Universal shortcode / filter: enforce permalink pattern
+  // Enforce unique permalink for all product files
   eleventyConfig.addGlobalData("eleventyComputed", {
     permalink: data => {
-      if (data.filePathStem && data.filePathStem.startsWith("/products/")) {
-        // use fileSlug so nike.md → /products/nike/
+      // Only apply to markdown files in the products folder
+      if (data.page && data.page.inputPath && data.page.inputPath.includes("/products/")) {
         return `/products/${data.page.fileSlug}/index.html`;
       }
-      return data.permalink; // fallback to whatever was set
+      return data.permalink; // fallback to front matter or default
     }
   });
 
