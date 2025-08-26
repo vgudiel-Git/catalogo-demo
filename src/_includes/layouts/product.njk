@@ -1,4 +1,5 @@
 <article class="product-detail">
+  {# Galería de varias imágenes #}
   {% if images and images.length > 0 %}
     <div class="product-gallery" data-image-count="{{ images.length }}">
       {% for img in images %}
@@ -7,8 +8,14 @@
         </div>
       {% endfor %}
     </div>
+
+  {# Imagen única (legacy) #}
   {% elif image %}
-    <img class="product-detail__img" src="{{ image }}" alt="{{ title }}">
+    <div class="gallery-item">
+      <img class="product-detail__img" src="{{ image }}" alt="{{ title }}">
+    </div>
+  {% else %}
+    <p>No hay imágenes disponibles para este producto.</p>
   {% endif %}
 
   <h1 class="product-detail__title">{{ title }}</h1>
