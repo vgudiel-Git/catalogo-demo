@@ -1,12 +1,9 @@
----
-layout: layouts/base.njk
----
 <article class="product-detail">
   {% if images and images.length > 0 %}
     <div class="product-gallery" data-image-count="{{ images.length }}">
-      {% for image in images %}
+      {% for img in images %}
         <div class="gallery-item">
-          <img class="product-detail__img" src="{{ image }}" alt="{{ title }} - Imagen {{ loop.index }}">
+          <img class="product-detail__img" src="{{ img.image }}" alt="{{ img.alt | default(title ~ ' - Imagen ' ~ loop.index) }}">
         </div>
       {% endfor %}
     </div>
