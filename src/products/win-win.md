@@ -1,12 +1,10 @@
 ---
-title: adidas
-price: 1252
+title: win win
+price: 4552
 images:
-  - image: /assets/images/products/web2.png
-    alt: "cool "
   - image: /assets/images/products/great3.png
-    alt: buenisimo
+    alt: hola
 layout: layouts/product.njk
 permalink: /products/{{slug}}/
 ---
-hola hola
+buenisimo
