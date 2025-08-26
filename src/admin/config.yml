@@ -10,8 +10,8 @@ backend:
 
 # Media: Define dónde se subirán las imágenes que tus clientes añadan.
 # Es buena práctica tener una carpeta específica para los productos.
-media_folder: "src/assets/images/products"
-public_folder: "/assets/images/products"
+media_folder: "src/assets/images"
+public_folder: "/assets/images"
 
 # Collections: Define el contenido que tu cliente puede editar.
 collections:
