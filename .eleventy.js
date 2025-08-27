@@ -6,7 +6,7 @@ module.exports = function(eleventyConfig) {
 
   // Create products collection
   eleventyConfig.addCollection("products", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/products/*.md");
+    return collectionApi.getFilteredByGlob("src/products/*.{md,html}");
   });
 
   // Enforce unique permalink for all product files

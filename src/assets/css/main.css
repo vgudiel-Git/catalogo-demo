@@ -231,6 +231,29 @@ main {
   color: #00C4EE;
 }
 
+/* WhatsApp button in product cards */
+.product-card .btn-whatsapp {
+  display: inline-block;
+  background: #25D366;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+  margin-top: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.product-card .btn-whatsapp:hover {
+  background: #128C7E;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+}
+
 /* --- Footer --- */
 footer {
   text-align: center;

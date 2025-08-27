@@ -1,10 +1,16 @@
 <article class="product-detail">
-  {# Galería de varias imágenes #}
+  {# Galería de varias imágenes - New format with objects #}
   {% if images and images.length > 0 %}
     <div class="product-gallery" data-image-count="{{ images.length }}">
       {% for img in images %}
         <div class="gallery-item">
-          <img class="product-detail__img" src="{{ img.image }}" alt="{{ img.alt | default(title ~ ' - Imagen ' ~ loop.index) }}">
+          {% if img.image %}
+            {# New format: images array with objects #}
+            <img class="product-detail__img" src="{{ img.image }}" alt="{{ img.alt or (title + ' - Imagen ' + loop.index) }}">
+          {% else %}
+            {# Legacy format: images array with strings #}
+            <img class="product-detail__img" src="{{ img }}" alt="{{ title + ' - Imagen ' + loop.index }}">
+          {% endif %}
         </div>
       {% endfor %}
     </div>
@@ -15,7 +21,9 @@
       <img class="product-detail__img" src="{{ image }}" alt="{{ title }}">
     </div>
   {% else %}
-    <p>No hay imágenes disponibles para este producto.</p>
+    <div class="gallery-item">
+      <img class="product-detail__img" src="/assets/images/default.jpg" alt="{{ title }}">
+    </div>
   {% endif %}
 
   <h1 class="product-detail__title">{{ title }}</h1>
@@ -29,7 +37,7 @@
   </div>
 
   <p>
-    <a class="btn-whatsapp" href="https://wa.me/16263941200" target="_blank" rel="noopener">
+    <a class="btn-whatsapp" href="https://wa.me/16263941200?text=Hola, me interesa el producto: {{ title }}" target="_blank" rel="noopener">
       Comprar por WhatsApp
     </a>
   </p>
