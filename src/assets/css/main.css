@@ -408,6 +408,10 @@ footer {
   margin-bottom: 3rem;
 }
 
+.product-detail__cta-container {
+  text-align: center;
+}
+
 .btn-whatsapp {
   display: inline-block;
   background: #25D366;
