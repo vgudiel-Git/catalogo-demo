@@ -12,9 +12,12 @@
       <h1><a href="/">Mi Catálogo</a></h1>
       <nav>
         <ul class="main-menu">
-          <li><a href="/" class="{% if page.url == '/' %}active{% endif %}">Inicio</a></li>
           <li class="dropdown">
-            <a href="#">Productos</a>
+            <button class="hamburger-button" aria-label="Toggle Menu">
+              <span class="hamburger-bar"></span>
+              <span class="hamburger-bar"></span>
+              <span class="hamburger-bar"></span>
+            </button>
             <ul class="dropdown-menu">
               {% for product in collections.products %}
                 <li>
@@ -50,6 +53,21 @@
         }
       });
     }
+  </script>
+
+  <script>
+    const hamburgerButton = document.querySelector('.hamburger-button');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    hamburgerButton.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!hamburgerButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.remove('open');
+      }
+    });
   </script>
 </body>
 </html>
