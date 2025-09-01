@@ -100,12 +100,20 @@ header nav a {
   display: block;
 }
 
+.products-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.25rem;
+  font-weight: 500;
+  display: none; /* Hidden on mobile */
+}
+
 .hamburger-button {
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
-  display: flex;
+  display: flex; /* Shown on mobile */
   flex-direction: column;
   justify-content: space-around;
   width: 30px;
@@ -117,6 +125,15 @@ header nav a {
   height: 3px;
   background-color: white;
   border-radius: 2px;
+}
+
+@media (min-width: 769px) {
+  .hamburger-button {
+    display: none;
+  }
+  .products-link {
+    display: inline-block;
+  }
 }
 
 /* --- Main content --- */
@@ -290,24 +307,22 @@ footer {
 
 /* --- Responsive adjustments header/menu --- */
 @media (max-width: 768px) {
-  header .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .main-menu {
-    flex-direction: column;
-    width: 100%;
+    display: none; /* Hide desktop nav structure on mobile */
   }
 
-  .main-menu > li {
-    width: 100%;
+  .dropdown-menu.open {
+    display: block;
+    position: absolute;
+    top: calc(100% + 5px); /* Position below header */
+    right: 0;
+    left: auto;
+    width: 250px;
   }
 
-  .dropdown-menu {
-    position: static;
-    border-radius: 0;
-    width: 100%;
+  /* Disable desktop hover behavior on mobile */
+  .dropdown:hover .dropdown-menu {
+    display: none;
   }
 }
 
