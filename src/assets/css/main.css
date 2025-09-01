@@ -87,9 +87,7 @@ header nav a {
   color: white;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
+
 
 .dropdown-menu li a:hover {
   background: #00C4EE;
@@ -307,8 +305,9 @@ footer {
 
 /* --- Responsive adjustments header/menu --- */
 @media (max-width: 768px) {
+  /* On mobile, the menu is triggered by the hamburger, not the hidden desktop link */
   .main-menu {
-    display: none; /* Hide desktop nav structure on mobile */
+    display: block; /* Ensure the menu container is not hidden */
   }
 
   .dropdown-menu.open {
@@ -318,11 +317,6 @@ footer {
     right: 0;
     left: auto;
     width: 250px;
-  }
-
-  /* Disable desktop hover behavior on mobile */
-  .dropdown:hover .dropdown-menu {
-    display: none;
   }
 }
 
