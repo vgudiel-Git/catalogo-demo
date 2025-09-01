@@ -7,38 +7,31 @@
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
-  <header class="site-header">
-      <a href="/" class="logo">Mi Catálogo</a>
-      
-      <!-- Desktop Navigation -->
-      <nav class="desktop-nav">
-          {% for product in collections.products %}
-            <a href="{{ product.url }}" class="{% if page.url == product.url %}active{% endif %}">
-              {{ product.data.title }}
-            </a>
-          {% endfor %}
+  <header>
+    <div class="header-inner">
+      <h1><a href="/">Mi Catálogo</a></h1>
+      <nav>
+        <ul class="main-menu">
+          <li class="dropdown">
+            <button class="hamburger-button" aria-label="Toggle Menu">
+              <span class="hamburger-bar"></span>
+              <span class="hamburger-bar"></span>
+              <span class="hamburger-bar"></span>
+            </button>
+            <ul class="dropdown-menu">
+              {% for product in collections.products %}
+                <li>
+                  <a href="{{ product.url }}" class="{% if page.url == product.url %}active{% endif %}">
+                    {{ product.data.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
       </nav>
-
-      <!-- Hamburger Menu Button -->
-      <button id="hamburger-button" class="hamburger-button">
-          <div class="line line-1"></div>
-          <div class="line line-2"></div>
-          <div class="line line-3"></div>
-      </button>
+    </div>
   </header>
-
-  <!-- Mobile Navigation Menu -->
-  <nav id="mobile-nav" class="mobile-nav glassmorphism">
-      <ul>
-          {% for product in collections.products %}
-            <li>
-              <a href="{{ product.url }}" class="menu-link {% if page.url == product.url %}active{% endif %}">
-                {{ product.data.title }}
-              </a>
-            </li>
-          {% endfor %}
-      </ul>
-  </nav>
 
   <main>
     {{ content | safe }}
@@ -62,6 +55,19 @@
     }
   </script>
 
-  <script src="/js/menu.js"></script>
+  <script>
+    const hamburgerButton = document.querySelector('.hamburger-button');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    hamburgerButton.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!hamburgerButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.remove('open');
+      }
+    });
+  </script>
 </body>
 </html>
