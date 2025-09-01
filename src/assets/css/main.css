@@ -271,7 +271,9 @@ main {
 
 /* WhatsApp button in product cards */
 .product-card .btn-whatsapp {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: #25D366;
   color: white;
   padding: 0.75rem 1.5rem;
@@ -445,7 +447,9 @@ footer {
 }
 
 .btn-whatsapp {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: #25D366;
   color: white;
   padding: 1rem 2rem;
@@ -580,4 +584,9 @@ footer {
     align-items: center;
     line-height: 1;
   }
+}
+
+.whatsapp-icon {
+    width: 24px;
+    height: 24px;
 }
