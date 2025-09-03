@@ -1,0 +1,37 @@
+---
+pagination:
+  data: collections.all
+  size: 1
+  alias: category
+  filter:
+    - all
+  group: "data.category"
+permalink: "categories/{{ category.group | slugify }}/"
+eleventyComputed:
+  title: "Categoría: {{ category.group }}"
+layout: "layouts/base.njk" # Assuming you have a base layout here. If not, remove this line.
+---
+
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Categoría: {{ category.group }}</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {%- for product in category.items -%}
+      <div class="border rounded-lg shadow-lg overflow-hidden">
+        <a href="{{ product.url }}">
+          {% if product.data.image %}
+            <img src="{{ product.data.image }}" alt="Imagen de {{ product.data.title }}" class="w-full h-48 object-cover">
+          {% endif %}
+          <div class="p-4">
+            <h2 class="font-semibold text-lg">{{ product.data.title }}</h2>
+            {# You can add price or other details here if you want #}
+          </div>
+        </a>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="mt-8">
+    <a href="/categories" class="text-blue-600 hover:underline">&larr; Volver a todas las categorías</a>
+  </div>
+</div>
