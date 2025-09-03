@@ -10,15 +10,17 @@ module.exports = function(eleventyConfig) {
   });
 
   eleventyConfig.addCollection("productsWithCategory", function(collectionApi) {
-    return collectionApi.getFilteredByCollection("products")
+    return collectionApi.getFilteredByGlob("src/products/*.{md,html}")
       .filter(item => item.data.category);
   });
 
   eleventyConfig.addCollection("categories", function(collectionApi) {
     let categories = new Set();
-    collectionApi.getFilteredByCollection("productsWithCategory").forEach(item => {
-      categories.add(item.data.category);
-    });
+    collectionApi.getFilteredByGlob("src/products/*.{md,html}")
+      .filter(item => item.data.category)
+      .forEach(item => {
+        categories.add(item.data.category);
+      });
     return [...categories];
   });
 
