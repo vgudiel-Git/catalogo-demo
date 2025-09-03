@@ -9,6 +9,7 @@ images:
   - "/assets/images/product1.jpg"
   - "/assets/images/product2.jpg"
 price: "$849.99"
+category: Accesorios
 layout: layouts/product.njk
 permalink: "/products/product6/"
 ---
