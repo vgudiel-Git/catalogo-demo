@@ -40,6 +40,18 @@ module.exports = function(eleventyConfig) {
     return category ? category.label : categoryValue;
   });
   
+  // Añadir filtro para formatear precios con comas en los millares y dos decimales
+  eleventyConfig.addNunjucksFilter("formatPrice", function(price) {
+    // Convertir a número si es string
+    const numPrice = typeof price === 'string' ? parseFloat(price) : price;
+    
+    // Formatear con comas en los millares y dos decimales
+    return numPrice.toLocaleString('es-GT', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  });
+  
   // Añadir filtro para obtener la etiqueta de una categoría por su valor
   eleventyConfig.addNunjucksFilter("getCategoryLabel", function(categoryValue) {
     const categories = [
