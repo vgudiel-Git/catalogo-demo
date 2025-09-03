@@ -1,9 +1,4 @@
-const lodash = require("lodash");
-
-module.exports = function(eleventyConfig) {
-  eleventyConfig.addFilter("groupBy", (collection, property) => {
-    return lodash.groupBy(collection, `data.${property}`);
-  }); 
+module.exports = function(eleventyConfig) { 
   // Copy CSS and images to _site
   eleventyConfig.addPassthroughCopy("src/assets");
   // Copy admin folder to _site

@@ -5,7 +5,6 @@ images:
   - image: /assets/images/products/web-estrategico.png
     alt: de lujo
 layout: layouts/product.njk
-category: "Accesorios"
 permalink: /products/{{slug}}/
 ---
 muy bueno

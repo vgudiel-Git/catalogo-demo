@@ -5,6 +5,5 @@ images:
   - image: /assets/images/products/web-estrategico.png
     alt: kiko
 layout: layouts/product.njk
-category: "Accesorios"
 ---
 cola2

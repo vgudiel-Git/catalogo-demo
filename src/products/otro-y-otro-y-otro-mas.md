@@ -5,6 +5,5 @@ images:
   - image: /assets/images/pexels-fauxels-3183150.jpg
     alt: yupi
 layout: layouts/product.njk
-category: "Accesorios"
 ---
 suerte
