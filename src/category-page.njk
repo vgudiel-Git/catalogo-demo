@@ -1,10 +1,8 @@
 ---
 pagination:
-  data: collections.all
+  data: collections.products
   size: 1
   alias: category
-  filter:
-    - all
   group: "data.category"
 permalink: "categories/{{ category.group | slugify }}/"
 eleventyComputed:

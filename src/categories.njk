@@ -8,11 +8,11 @@ permalink: "/categories/"
   <h1 class="text-3xl font-bold mb-6">Todas las Categorías de Productos</h1>
 
   <div class="list-disc space-y-2">
-    {%- set categoryList = collections.all | group("data.category") -%}
-    {%- for category in categoryList -%}
-      {% if category.group %}
-        <a href="/categories/{{ category.group | slugify }}/" class="block p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
-          <h2 class="text-xl font-semibold">{{ category.group }}</h2>
+    {%- set categoryList = collections.products | groupBy("category") -%}
+    {%- for categoryName, products in categoryList -%}
+      {% if categoryName %}
+        <a href="/categories/{{ categoryName | slugify }}/" class="block p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+          <h2 class="text-xl font-semibold">{{ categoryName }}</h2>
         </a>
       {% endif %}
     {%- endfor -%}
