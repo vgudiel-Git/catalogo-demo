@@ -5,8 +5,8 @@ backend:
   name: git-gateway
   branch: main # O la rama que uses, ej: master
 
-# OJO: He eliminado "local_backend: true". Esa línea solo sirve para hacer
-# pruebas en local y debe quitarse para que se conecte correctamente a Netlify.
+# Añadimos local_backend para pruebas locales
+local_backend: true
 
 # Media: Define dónde se subirán las imágenes que tus clientes añadan.
 # Es buena práctica tener una carpeta específica para los productos.

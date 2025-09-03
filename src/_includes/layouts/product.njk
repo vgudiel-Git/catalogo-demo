@@ -3,8 +3,8 @@ layout: layouts/base.njk
 ---
 <article class="product-detail">
   {# Galería de varias imágenes - New format with objects #}
-  {% if images and images.length > 0 %}
-    <div class="product-gallery" data-image-count="{{ images.length }}">
+  {% if images and (images | length) > 0 %}
+    <div class="product-gallery" data-image-count="{{ images | length }}">
       {% for img in images %}
         <div class="gallery-item">
           {% if img.image %}
@@ -38,7 +38,7 @@ layout: layouts/base.njk
   {% if category %}
     <p class="product-detail__category">
       <span class="category-label">Categoría:</span>
-      <a href="/#{{ category }}" class="category-link">{{ getCategories() | find("value", category).label }}</a>
+      <a href="/#{{ category }}" class="category-link">{{ category | getCategoryLabel }}</a>
     </p>
   {% endif %}
 

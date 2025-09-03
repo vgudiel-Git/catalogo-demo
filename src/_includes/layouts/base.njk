@@ -18,7 +18,7 @@
           <li class="dropdown">
             <a href="#" class="categories-link" onclick="event.preventDefault(); return false;">Categorías</a>
             <ul class="dropdown-menu">
-              {% for category in getCategories() %}
+              {% for category in categories %}
                 <li>
                   <a href="/#{{ category.value }}" class="category-link">
                     {{ category.label }}
@@ -35,7 +35,7 @@
                   <a href="{{ product.url }}" class="{% if page.url == product.url %}active{% endif %}">
                     {{ product.data.title }}
                     {% if product.data.category %}
-                      <small class="product-category-tag">{{ getCategories() | find("value", product.data.category).label }}</small>
+                      <small class="product-category-tag">{{ product.data.category | getCategoryLabel }}</small>
                     {% endif %}
                   </a>
                 </li>

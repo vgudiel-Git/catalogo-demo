@@ -6,7 +6,7 @@ layout: layouts/base.njk
 <div class="category-tabs">
   <ul class="category-nav">
     <li><a href="#todos" class="active">Todos los Productos</a></li>
-    {% for category in getCategories() %}
+    {% for category in categories %}
       <li><a href="#{{ category.value }}">{{ category.label }}</a></li>
     {% endfor %}
   </ul>
@@ -19,13 +19,13 @@ layout: layouts/base.njk
     {% for product in collections.products %}
       <div class="product-card">
         <a href="{{ product.url }}">
-          {% if product.data.images and product.data.images.length > 0 %}
+          {% if product.data.images and (product.data.images | length) > 0 %}
             {% if product.data.images[0].image %}
-              <img src="{{ product.data.images[0].image }}" alt="{{ product.data.images[0].alt | default: product.data.title }}">
+              <img src="{{ product.data.images[0].image }}" alt="{{ product.data.images[0].alt | default(product.data.title) }}">
             {% else %}
               <img src="{{ product.data.images[0] }}" alt="{{ product.data.title }}">
             {% endif %}
-          {% elsif product.data.image %}
+          {% elif product.data.image %}
             <img src="{{ product.data.image }}" alt="{{ product.data.title }}">
           {% else %}
             <img src="/assets/images/default.jpg" alt="{{ product.data.title }}">
@@ -33,7 +33,7 @@ layout: layouts/base.njk
           <h3>{{ product.data.title }}</h3>
           <p class="price">Q{{ product.data.price }}</p>
           {% if product.data.category %}
-            <span class="product-category">{{ getCategories() | find("value", product.data.category).label }}</span>
+            <span class="product-category">{{ product.data.category | getCategoryLabel }}</span>
           {% endif %}
         </a>
         <a class="btn-whatsapp" href="https://wa.me/16263941200?text=Hola, me interesa el producto: {{ product.data.title }}" target="_blank" rel="noopener">
@@ -47,21 +47,21 @@ layout: layouts/base.njk
   </section>
 
   <!-- Secciones para cada categoría -->
-  {% for category in getCategories() %}
+  {% for category in categories %}
     <section id="{{ category.value }}" class="product-grid category-section">
       <h2 class="category-title">{{ category.label }}</h2>
       {% set categoryCollection = collections["category-" + category.value] %}
-      {% if categoryCollection and categoryCollection.length > 0 %}
+      {% if categoryCollection and (categoryCollection | length) > 0 %}
         {% for product in categoryCollection %}
           <div class="product-card">
             <a href="{{ product.url }}">
-              {% if product.data.images and product.data.images.length > 0 %}
+              {% if product.data.images and (product.data.images | length) > 0 %}
                 {% if product.data.images[0].image %}
-                  <img src="{{ product.data.images[0].image }}" alt="{{ product.data.images[0].alt | default: product.data.title }}">
+                  <img src="{{ product.data.images[0].image }}" alt="{{ product.data.images[0].alt | default(product.data.title) }}">
                 {% else %}
                   <img src="{{ product.data.images[0] }}" alt="{{ product.data.title }}">
                 {% endif %}
-              {% elsif product.data.image %}
+              {% elif product.data.image %}
                 <img src="{{ product.data.image }}" alt="{{ product.data.title }}">
               {% else %}
                 <img src="/assets/images/default.jpg" alt="{{ product.data.title }}">

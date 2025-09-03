@@ -9,23 +9,40 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/products/*.{md,html}");
   });
   
-  // Crear colecciones por categoría
-  const categories = [
-    "ropa-calzado", "accesorios", "mascotas", "hogar", 
-    "electrodomesticos", "juguetes", "deportes", "tecnologia", "temporada"
+  // Definir categorías como datos globales
+  const categoriesData = [
+    { label: "Ropa & Calzado", value: "ropa-calzado" },
+    { label: "Accesorios", value: "accesorios" },
+    { label: "Mascotas", value: "mascotas" },
+    { label: "Hogar", value: "hogar" },
+    { label: "Electrodomésticos", value: "electrodomesticos" },
+    { label: "Juguetes", value: "juguetes" },
+    { label: "Deportes", value: "deportes" },
+    { label: "Tecnología", value: "tecnologia" },
+    { label: "Temporada", value: "temporada" }
   ];
   
-  categories.forEach(category => {
-    eleventyConfig.addCollection(`category-${category}`, function(collectionApi) {
+  // Añadir datos globales para categorías
+  eleventyConfig.addGlobalData("categories", categoriesData);
+  
+  // Crear colecciones por categoría
+  categoriesData.forEach(category => {
+    eleventyConfig.addCollection(`category-${category.value}`, function(collectionApi) {
       return collectionApi.getFilteredByGlob("src/products/*.{md,html}").filter(item => {
-        return item.data.category === category;
+        return item.data.category === category.value;
       });
     });
   });
   
-  // Añadir filtro para obtener todas las categorías disponibles
-  eleventyConfig.addFilter("getCategories", function() {
-    return [
+  // Añadir filtro para obtener la etiqueta de una categoría por su valor
+  eleventyConfig.addNunjucksFilter("getCategoryLabel", function(categoryValue) {
+    const category = categoriesData.find(cat => cat.value === categoryValue);
+    return category ? category.label : categoryValue;
+  });
+  
+  // Añadir filtro para obtener la etiqueta de una categoría por su valor
+  eleventyConfig.addNunjucksFilter("getCategoryLabel", function(categoryValue) {
+    const categories = [
       { label: "Ropa & Calzado", value: "ropa-calzado" },
       { label: "Accesorios", value: "accesorios" },
       { label: "Mascotas", value: "mascotas" },
@@ -36,6 +53,8 @@ module.exports = function(eleventyConfig) {
       { label: "Tecnología", value: "tecnologia" },
       { label: "Temporada", value: "temporada" }
     ];
+    const category = categories.find(cat => cat.value === categoryValue);
+    return category ? category.label : categoryValue;
   });
 
   // Enforce unique permalink for all product files
