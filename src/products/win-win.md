@@ -1,7 +1,6 @@
 ---
 title: win win
 price: 4552
-category: Accesorios
 images:
   - image: /assets/images/products/great3.png
     alt: hola

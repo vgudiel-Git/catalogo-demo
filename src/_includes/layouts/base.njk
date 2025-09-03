@@ -15,10 +15,10 @@
           <li class="dropdown">
             <a href="#" class="products-link" onclick="event.preventDefault(); return false;">Productos</a>
             <ul class="dropdown-menu">
-              {% for category in collections.categories %}
+              {% for product in collections.products %}
                 <li>
-                  <a href="/categories/{{ category.slug }}/">
-                    {{ category.title }}
+                  <a href="{{ product.url }}" class="{% if page.url == product.url %}active{% endif %}">
+                    {{ product.data.title }}
                   </a>
                 </li>
               {% endfor %}

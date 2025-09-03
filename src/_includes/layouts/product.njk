@@ -35,10 +35,6 @@ layout: layouts/base.njk
     <p class="product-detail__price">Q{{ price }}</p>
   {% endif %}
 
-  {% if category %}
-    <p class="product-detail__category">Categoría: {{ category }}</p>
-  {% endif %}
-
   <div class="product-detail__content">
     {{ content | safe }}
   </div>

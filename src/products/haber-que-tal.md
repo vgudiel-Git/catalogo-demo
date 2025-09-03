@@ -1,7 +1,6 @@
 ---
 title: haber que tal
 price: 1009
-category: Accesorios
 images:
   - image: /assets/images/products/all1.png
     alt: clic

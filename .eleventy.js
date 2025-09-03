@@ -1,12 +1,4 @@
-module.exports = function(eleventyConfig) {
-  eleventyConfig.addFilter("slugify", (text) => {
-    return text.toString().toLowerCase()
-      .replace(/\s+/g, '-')           // Replace spaces with -
-      .replace(/[^\w-]+/g, '')       // Remove all non-word chars
-      .replace(/--+/g, '-')          // Replace multiple - with single -
-      .replace(/^-+/, '')            // Trim - from start of text
-      .replace(/-+$/, '');           // Trim - from end of text
-  });
+module.exports = function(eleventyConfig) { 
   // Copy CSS and images to _site
   eleventyConfig.addPassthroughCopy("src/assets");
   // Copy admin folder to _site
@@ -17,21 +9,16 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/products/*.{md,html}");
   });
 
-  eleventyConfig.addCollection("categories", function(collectionApi) {
-    const allCategories = collectionApi.getFilteredByGlob("src/products/*.{md,html}")
-      .map(item => item.data.category)
-      .filter(category => category !== undefined);
-
-    // Return unique categories
-    return [...new Set(allCategories)].map(category => ({
-      title: category,
-      slug: eleventyConfig.getFilter("slugify")(category)
-    }));
+  // Enforce unique permalink for all product files
+  eleventyConfig.addGlobalData("eleventyComputed", {
+    permalink: data => {
+      // Only apply to markdown files in the products folder
+      if (data.page && data.page.inputPath && data.page.inputPath.includes("/products/")) {
+        return `/products/${data.page.fileSlug}/index.html`;
+      }
+      return data.permalink; // fallback to front matter or default
+    }
   });
-
-
-
-
 
   return {
     dir: {
