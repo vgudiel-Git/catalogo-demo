@@ -24,19 +24,6 @@ collections:
       - { label: "Nombre del Producto", name: "title", widget: "string" }
       - { label: "Descripción", name: "body", widget: "markdown" }
       - { label: "Precio", name: "price", widget: "number", value_type: "float", min: 0 }
-      - label: "Categoría"
-        name: "category"
-        widget: "select"
-        options:
-          - "Ropa & Calzado"
-          - "Accesorios"
-          - "Mascotas"
-          - "Hogar"
-          - "Electrodomésticos"
-          - "Juguetes"
-          - "Deportes"
-          - "Tecnología"
-          - "Temporada"
 
       - label: "Galería de Fotos del Producto"
         name: "images"

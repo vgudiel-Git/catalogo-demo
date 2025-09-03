@@ -5,7 +5,6 @@ images:
   - image: /assets/images/products/great3.png
     alt: hola
 layout: layouts/product.njk
-category: "Accesorios"
 permalink: /products/{{slug}}/
 ---
 buenisimo

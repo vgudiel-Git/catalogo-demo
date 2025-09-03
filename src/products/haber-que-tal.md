@@ -5,6 +5,5 @@ images:
   - image: /assets/images/products/all1.png
     alt: clic
 layout: layouts/product.njk
-category: "Accesorios"
 ---
 se ve bien

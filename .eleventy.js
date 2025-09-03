@@ -9,21 +9,6 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/products/*.{md,html}");
   });
 
-  eleventyConfig.addCollection("productsWithCategory", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/products/*.{md,html}")
-      .filter(item => item.data && item.data.category);
-  });
-
-  eleventyConfig.addCollection("categories", function(collectionApi) {
-    let categories = new Set();
-    collectionApi.getFilteredByGlob("src/products/*.{md,html}")
-      .filter(item => item.data && item.data.category)
-      .forEach(item => {
-        categories.add(item.data.category);
-      });
-    return [...categories];
-  });
-
   // Enforce unique permalink for all product files
   eleventyConfig.addGlobalData("eleventyComputed", {
     permalink: data => {
