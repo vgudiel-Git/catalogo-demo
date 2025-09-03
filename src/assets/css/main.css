@@ -162,6 +162,90 @@ main {
   grid-template-columns: repeat(4, 1fr);
 }
 
+/* --- Category Navigation --- */
+.category-tabs {
+  background-color: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+}
+
+.category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.5rem;
+}
+
+.category-nav li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.category-nav li a:hover {
+  background-color: #f0f0f0;
+  color: #3864A3;
+}
+
+.category-nav li a.active {
+  background-color: #3864A3;
+  color: white;
+}
+
+/* --- Category Sections --- */
+.category-section {
+  display: none;
+}
+
+.category-section.active {
+  display: grid;
+}
+
+.category-title {
+  grid-column: 1 / -1;
+  margin-bottom: 1rem;
+  color: #3864A3;
+  border-bottom: 2px solid #3864A3;
+  padding-bottom: 0.5rem;
+}
+
+.product-category {
+  display: inline-block;
+  background-color: #3864A3;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.product-category-tag {
+  display: inline-block;
+  background-color: #3864A3;
+  color: white;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  margin-left: 0.5rem;
+  font-weight: normal;
+}
+
+.no-products {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  color: #666;
+}
+
 /* Add a subtle animation for grid items */
 .product-grid > * {
   animation: fadeInUp 0.6s ease-out;
@@ -327,6 +411,31 @@ footer {
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem 0;
+}
+
+.product-detail__category {
+  margin-top: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.category-label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.product-detail__category .category-link {
+  display: inline-block;
+  background-color: #3864A3;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.product-detail__category .category-link:hover {
+  background-color: #2c5282;
 }
 
 /* Product Gallery */

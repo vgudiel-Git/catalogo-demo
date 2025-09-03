@@ -24,6 +24,19 @@ collections:
       - { label: "Nombre del Producto", name: "title", widget: "string" }
       - { label: "Descripción", name: "body", widget: "markdown" }
       - { label: "Precio", name: "price", widget: "number", value_type: "float", min: 0 }
+      - label: "Categoría"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Ropa & Calzado", value: "ropa-calzado" }
+          - { label: "Accesorios", value: "accesorios" }
+          - { label: "Mascotas", value: "mascotas" }
+          - { label: "Hogar", value: "hogar" }
+          - { label: "Electrodomésticos", value: "electrodomesticos" }
+          - { label: "Juguetes", value: "juguetes" }
+          - { label: "Deportes", value: "deportes" }
+          - { label: "Tecnología", value: "tecnologia" }
+          - { label: "Temporada", value: "temporada" }
 
       - label: "Galería de Fotos del Producto"
         name: "images"

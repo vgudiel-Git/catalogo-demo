@@ -12,6 +12,21 @@
       <h1><a href="/">Mi Catálogo</a></h1>
       <nav>
         <ul class="main-menu">
+          <li>
+            <a href="/" class="{% if page.url == '/' %}active{% endif %}">Inicio</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="categories-link" onclick="event.preventDefault(); return false;">Categorías</a>
+            <ul class="dropdown-menu">
+              {% for category in getCategories() %}
+                <li>
+                  <a href="/#{{ category.value }}" class="category-link">
+                    {{ category.label }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
           <li class="dropdown">
             <a href="#" class="products-link" onclick="event.preventDefault(); return false;">Productos</a>
             <ul class="dropdown-menu">
@@ -19,6 +34,9 @@
                 <li>
                   <a href="{{ product.url }}" class="{% if page.url == product.url %}active{% endif %}">
                     {{ product.data.title }}
+                    {% if product.data.category %}
+                      <small class="product-category-tag">{{ getCategories() | find("value", product.data.category).label }}</small>
+                    {% endif %}
                   </a>
                 </li>
               {% endfor %}

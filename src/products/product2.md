@@ -4,7 +4,8 @@ image: "/assets/images/product2.jpg"
 images:
   - "/assets/images/product2.jpg"
   - "/assets/images/product6.jpg"
-price: "$329.99"
+price: "329.99"
+category: "hogar"
 layout: layouts/product.njk
 permalink: "/products/product2/"
 ---

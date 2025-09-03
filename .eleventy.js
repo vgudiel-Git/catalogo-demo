@@ -8,6 +8,35 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("products", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/products/*.{md,html}");
   });
+  
+  // Crear colecciones por categoría
+  const categories = [
+    "ropa-calzado", "accesorios", "mascotas", "hogar", 
+    "electrodomesticos", "juguetes", "deportes", "tecnologia", "temporada"
+  ];
+  
+  categories.forEach(category => {
+    eleventyConfig.addCollection(`category-${category}`, function(collectionApi) {
+      return collectionApi.getFilteredByGlob("src/products/*.{md,html}").filter(item => {
+        return item.data.category === category;
+      });
+    });
+  });
+  
+  // Añadir filtro para obtener todas las categorías disponibles
+  eleventyConfig.addFilter("getCategories", function() {
+    return [
+      { label: "Ropa & Calzado", value: "ropa-calzado" },
+      { label: "Accesorios", value: "accesorios" },
+      { label: "Mascotas", value: "mascotas" },
+      { label: "Hogar", value: "hogar" },
+      { label: "Electrodomésticos", value: "electrodomesticos" },
+      { label: "Juguetes", value: "juguetes" },
+      { label: "Deportes", value: "deportes" },
+      { label: "Tecnología", value: "tecnologia" },
+      { label: "Temporada", value: "temporada" }
+    ];
+  });
 
   // Enforce unique permalink for all product files
   eleventyConfig.addGlobalData("eleventyComputed", {

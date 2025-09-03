@@ -6,6 +6,7 @@ images:
   - "/assets/images/product1.jpg"
   - "/assets/images/product2.jpg"
 price: "$1449.99"
+category: "electronica"
 layout: layouts/product.njk
 permalink: "/products/product3/"
 ---
