@@ -11,13 +11,13 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addCollection("productsWithCategory", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/products/*.{md,html}")
-      .filter(item => item.data.category);
+      .filter(item => item.data && item.data.category);
   });
 
   eleventyConfig.addCollection("categories", function(collectionApi) {
     let categories = new Set();
     collectionApi.getFilteredByGlob("src/products/*.{md,html}")
-      .filter(item => item.data.category)
+      .filter(item => item.data && item.data.category)
       .forEach(item => {
         categories.add(item.data.category);
       });
