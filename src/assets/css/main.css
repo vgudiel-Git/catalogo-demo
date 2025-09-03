@@ -20,6 +20,9 @@ header .header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 header h1 {
@@ -79,6 +82,8 @@ header nav a {
   z-index: 100;
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
   border: 1px solid rgba(255,255,255,0.1);
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .dropdown-menu li a {
@@ -98,12 +103,11 @@ header nav a {
   display: block;
 }
 
-.products-link {
+.categories-link {
   color: white;
   text-decoration: none;
   padding: 0.75rem 1.25rem;
   font-weight: 500;
-  display: none; /* Hidden on mobile */
 }
 
 .hamburger-button {
@@ -123,14 +127,48 @@ header nav a {
   height: 3px;
   background-color: white;
   border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animación del botón hamburguesa */
+.hamburger-button.active .hamburger-bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger-button.active .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-button.active .hamburger-bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
 }
 
 @media (min-width: 769px) {
   .hamburger-button {
     display: none;
   }
-  .products-link {
-    display: inline-block;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    position: fixed;
+    top: 70px; /* Ajustar según la altura del header */
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+  
+  .main-menu {
+    justify-content: flex-end;
+  }
+  
+  /* Ocultar el botón de categorías en móvil, solo mostrar hamburguesa */
+  .categories-link {
+    display: none;
   }
 }
 
@@ -297,6 +335,11 @@ main {
   backdrop-filter: blur(10px);
 }
 
+.product-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .product-card:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 12px 32px rgba(0,0,0,0.15);
@@ -317,6 +360,7 @@ main {
   margin: 0.5rem 0;
   font-size: 1.2rem;
   color: #3864A3;
+  text-decoration: none;
 }
 
 /* Responsive product card text */
@@ -351,6 +395,7 @@ main {
 .product-card .price {
   font-weight: bold;
   color: black;
+  text-decoration: none;
 }
 
 /* WhatsApp button in product cards */
@@ -535,6 +580,7 @@ footer {
   color: #3864A3;
   margin-bottom: 1rem;
   text-align: center;
+  text-decoration: none;
 }
 
 .product-detail__price {
@@ -543,6 +589,7 @@ footer {
   color: black;
   text-align: center;
   margin-bottom: 2rem;
+  text-decoration: none;
 }
 
 .product-detail__content {

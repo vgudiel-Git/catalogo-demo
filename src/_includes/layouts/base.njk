@@ -12,31 +12,13 @@
       <h1><a href="/">Mi Catálogo</a></h1>
       <nav>
         <ul class="main-menu">
-          <li>
-            <a href="/" class="{% if page.url == '/' %}active{% endif %}">Inicio</a>
-          </li>
           <li class="dropdown">
             <a href="#" class="categories-link" onclick="event.preventDefault(); return false;">Categorías</a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu categories-menu">
               {% for category in categories %}
                 <li>
                   <a href="/#{{ category.value }}" class="category-link">
                     {{ category.label }}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="products-link" onclick="event.preventDefault(); return false;">Productos</a>
-            <ul class="dropdown-menu">
-              {% for product in collections.products %}
-                <li>
-                  <a href="{{ product.url }}" class="{% if page.url == product.url %}active{% endif %}">
-                    {{ product.data.title }}
-                    {% if product.data.category %}
-                      <small class="product-category-tag">{{ product.data.category | getCategoryLabel }}</small>
-                    {% endif %}
                   </a>
                 </li>
               {% endfor %}
@@ -76,24 +58,38 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const productsLink = document.querySelector('.products-link');
+      const categoriesLink = document.querySelector('.categories-link');
       const hamburgerButton = document.querySelector('.hamburger-button');
-      const dropdownMenu = document.querySelector('.dropdown-menu');
+      const categoriesMenu = document.querySelector('.categories-menu');
 
-      const toggleMenu = (event) => {
+      const toggleCategoriesMenu = (event) => {
         event.stopPropagation(); // Prevent this click from immediately closing the menu
-        dropdownMenu.classList.toggle('open');
+        categoriesMenu.classList.toggle('open');
+        hamburgerButton.classList.toggle('active');
       };
 
       // Event listeners for both buttons
-      productsLink.addEventListener('click', toggleMenu);
-      hamburgerButton.addEventListener('click', toggleMenu);
+      categoriesLink.addEventListener('click', toggleCategoriesMenu);
+      hamburgerButton.addEventListener('click', toggleCategoriesMenu);
 
       // Close the menu if the user clicks anywhere else on the page
       document.addEventListener('click', (event) => {
-        if (dropdownMenu.classList.contains('open') && !dropdownMenu.contains(event.target)) {
-          dropdownMenu.classList.remove('open');
+        if (categoriesMenu.classList.contains('open') && 
+            !categoriesMenu.contains(event.target) && 
+            event.target !== categoriesLink && 
+            event.target !== hamburgerButton) {
+          categoriesMenu.classList.remove('open');
+          hamburgerButton.classList.remove('active');
         }
+      });
+
+      // Cerrar el menú después de hacer clic en un enlace de categoría
+      const categoryLinks = document.querySelectorAll('.category-link');
+      categoryLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          categoriesMenu.classList.remove('open');
+          hamburgerButton.classList.remove('active');
+        });
       });
     });
   </script>
