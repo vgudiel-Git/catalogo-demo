@@ -54,7 +54,6 @@ collections:
         min: 0
         required: false
         hint: "Solo completar si seleccionó 'Personalizar precio' en la opción anterior"
-        pattern: ["^\\d+(\\.\\d{1,2})?$", "Ingrese un precio válido con hasta dos decimales"]
 
       - label: "Galería de Fotos del Producto"
         name: "images"
