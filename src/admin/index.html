@@ -78,26 +78,41 @@
     };
     
     // Iniciar cuando el CMS esté listo
-    if (window.CMS) {
-      window.CMS.registerEventListener({
-        name: 'preSave',
-        handler: (data) => {
-          // Si el descuento no es personalizado, asegurarse de que el precio personalizado sea nulo
-          if (data.discount !== 'custom') {
-            data.discountPrice = null;
-          }
-          return data;
-        }
-      });
-      
-      window.CMS.registerEventListener({
-        name: 'postLoad',
-        handler: handleDiscountFieldVisibility
-      });
-    } else {
-      // Si CMS no está disponible, intentar cuando el documento esté listo
-      document.addEventListener('DOMContentLoaded', handleDiscountFieldVisibility);
-    }
+     document.addEventListener('DOMContentLoaded', () => {
+       // Esperar a que el CMS se cargue completamente
+       const waitForCMS = () => {
+         if (window.CMS && window.CMS.getBackend) {
+           // CMS está listo, configurar los event listeners
+           try {
+             window.CMS.registerEventListener({
+               name: 'preSave',
+               handler: (data) => {
+                 // Si el descuento no es personalizado, asegurarse de que el precio personalizado sea nulo
+                 if (data.discount !== 'custom') {
+                   data.discountPrice = null;
+                 }
+                 return data;
+               }
+             });
+           } catch (e) {
+             console.log('Error registering preSave event:', e);
+           }
+           
+           // Ejecutar la función de visibilidad después de que el CMS esté listo
+           setTimeout(handleDiscountFieldVisibility, 2000);
+         } else {
+           // Si CMS no está listo, intentar nuevamente
+           setTimeout(waitForCMS, 500);
+         }
+       };
+       
+       waitForCMS();
+     });
+     
+     // También intentar cuando la ventana esté completamente cargada
+     window.addEventListener('load', () => {
+       setTimeout(handleDiscountFieldVisibility, 3000);
+     });
   </script>
 </body>
 </html>
