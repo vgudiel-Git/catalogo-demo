@@ -83,20 +83,8 @@
        const waitForCMS = () => {
          if (window.CMS && window.CMS.getBackend) {
            // CMS está listo, configurar los event listeners
-           try {
-             window.CMS.registerEventListener({
-               name: 'preSave',
-               handler: (data) => {
-                 // Si el descuento no es personalizado, asegurarse de que el precio personalizado sea nulo
-                 if (data.discount !== 'custom') {
-                   data.discountPrice = null;
-                 }
-                 return data;
-               }
-             });
-           } catch (e) {
-             console.log('Error registering preSave event:', e);
-           }
+           // Removido el evento preSave que causaba conflictos
+           console.log('CMS loaded successfully');
            
            // Ejecutar la función de visibilidad después de que el CMS esté listo
            setTimeout(handleDiscountFieldVisibility, 2000);
