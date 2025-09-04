@@ -75,7 +75,15 @@ layout: layouts/base.njk
                 <img src="/assets/images/default.jpg" alt="{{ product.data.title }}">
               {% endif %}
               <h3>{{ product.data.title }}</h3>
-              <p class="price">Q{{ product.data.price | formatPrice }}</p>
+              {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}
+              {% if discountPrice %}
+                <div class="price-container">
+                  <p class="price original-price">Q{{ product.data.price | formatPrice }}</p>
+                  <p class="price discount-price">Q{{ discountPrice | formatPrice }}</p>
+                </div>
+              {% else %}
+                <p class="price">Q{{ product.data.price | formatPrice }}</p>
+              {% endif %}
             </a>
             <a class="btn-whatsapp" href="https://wa.me/16263941200?text=Hola, me interesa el producto: {{ product.data.title }}" target="_blank" rel="noopener">
               <span>Comprar por</span>
