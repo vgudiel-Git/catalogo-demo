@@ -30,6 +30,10 @@ layout: layouts/base.njk
           {% else %}
             <img src="/assets/images/default.jpg" alt="{{ product.data.title }}">
           {% endif %}
+          {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}
+          {% if discountPrice %}
+            <span class="offer-badge">Oferta</span>
+          {% endif %}
           <h3>{{ product.data.title }}</h3>
           {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}
           {% if discountPrice %}
@@ -73,6 +77,10 @@ layout: layouts/base.njk
                 <img src="{{ product.data.image }}" alt="{{ product.data.title }}">
               {% else %}
                 <img src="/assets/images/default.jpg" alt="{{ product.data.title }}">
+              {% endif %}
+              {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}
+              {% if discountPrice %}
+                <span class="offer-badge">Oferta</span>
               {% endif %}
               <h3>{{ product.data.title }}</h3>
               {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}
