@@ -31,7 +31,15 @@ layout: layouts/base.njk
             <img src="/assets/images/default.jpg" alt="{{ product.data.title }}">
           {% endif %}
           <h3>{{ product.data.title }}</h3>
-          <p class="price">Q{{ product.data.price | formatPrice }}</p>
+          {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}
+          {% if discountPrice %}
+            <div class="price-container">
+              <p class="price original-price">Q{{ product.data.price | formatPrice }}</p>
+              <p class="price discount-price">Q{{ discountPrice | formatPrice }}</p>
+            </div>
+          {% else %}
+            <p class="price">Q{{ product.data.price | formatPrice }}</p>
+          {% endif %}
           {% if product.data.category %}
             <span class="product-category">{{ product.data.category | getCategoryLabel }}</span>
           {% endif %}

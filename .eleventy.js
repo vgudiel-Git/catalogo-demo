@@ -52,6 +52,30 @@ module.exports = function(eleventyConfig) {
     });
   });
   
+  // Añadir filtro para calcular el precio con descuento
+  eleventyConfig.addNunjucksFilter("calculateDiscountPrice", function(price, discount, customPrice) {
+    // Si no hay descuento, retornar null
+    if (!discount || discount === 'none') {
+      return null;
+    }
+    
+    // Convertir a número si es string
+    const numPrice = typeof price === 'string' ? parseFloat(price) : price;
+    
+    // Si es precio personalizado, retornar ese precio
+    if (discount === 'custom' && customPrice) {
+      return typeof customPrice === 'string' ? parseFloat(customPrice) : customPrice;
+    }
+    
+    // Calcular el descuento según el porcentaje
+    const discountPercent = parseInt(discount, 10);
+    if (!isNaN(discountPercent)) {
+      return numPrice * (1 - discountPercent / 100);
+    }
+    
+    return null;
+  });
+  
   // Añadir filtro para obtener la etiqueta de una categoría por su valor
   eleventyConfig.addNunjucksFilter("getCategoryLabel", function(categoryValue) {
     const categories = [

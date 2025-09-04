@@ -32,7 +32,15 @@ layout: layouts/base.njk
   <h1 class="product-detail__title">{{ title }}</h1>
 
   {% if price %}
-    <p class="product-detail__price">Q{{ price | formatPrice }}</p>
+    {% set discountPrice = price | calculateDiscountPrice(discount, discountPrice) %}
+    {% if discountPrice %}
+      <div class="product-detail__price-container">
+        <p class="product-detail__price original-price">Q{{ price | formatPrice }}</p>
+        <p class="product-detail__price discount-price">Q{{ discountPrice | formatPrice }}</p>
+      </div>
+    {% else %}
+      <p class="product-detail__price">Q{{ price | formatPrice }}</p>
+    {% endif %}
   {% endif %}
   
   {% if category %}

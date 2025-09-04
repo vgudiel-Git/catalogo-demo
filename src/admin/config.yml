@@ -37,6 +37,24 @@ collections:
           - { label: "Deportes", value: "deportes" }
           - { label: "Tecnología", value: "tecnologia" }
           - { label: "Temporada", value: "temporada" }
+      - label: "Productos en Oferta"
+        name: "discount"
+        widget: "select"
+        options:
+          - { label: "Sin oferta", value: "none" }
+          - { label: "10% de descuento", value: "10" }
+          - { label: "20% de descuento", value: "20" }
+          - { label: "30% de descuento", value: "30" }
+          - { label: "Personalizar precio", value: "custom" }
+        default: "none"
+      - label: "Precio en Oferta"
+        name: "discountPrice"
+        widget: "number"
+        value_type: "float"
+        min: 0
+        required: false
+        hint: "Solo completar si seleccionó 'Personalizar precio' en la opción anterior"
+        pattern: ["^\\d+(\\.\\d{1,2})?$", "Ingrese un precio válido con hasta dos decimales"]
 
       - label: "Galería de Fotos del Producto"
         name: "images"
