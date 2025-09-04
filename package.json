@@ -1,6 +1,6 @@
 {
   "name": "catalog-demo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Demo del catalogo de Hugo creado con Eleventy",
   "main": "index.js",
   "scripts": {
