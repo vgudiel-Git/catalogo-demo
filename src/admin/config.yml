@@ -20,6 +20,21 @@ collections:
     folder: "src/products"
     create: true
     slug: "{{slug}}"
+    summary: "{{title}} - {{price}}"
+    preview_path: "/products/{{slug}}"
+    media_library:
+      config:
+        multiple: true
+    view_filters:
+      - label: "Con Ofertas"
+        field: discount
+        pattern: "^(?!none$).*"
+    view_groups:
+      - label: "Categoría"
+        field: category
+    summary_fields: ["title", "price"]
+    card_preview: true
+    card_preview_image: "image"
     fields:
       - { label: "Nombre del Producto", name: "title", widget: "string" }
       - { label: "Descripción", name: "body", widget: "markdown" }

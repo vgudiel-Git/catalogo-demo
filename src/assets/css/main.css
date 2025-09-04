@@ -406,10 +406,20 @@ main {
 }
 
 .original-price {
-  color: #777;
-  text-decoration: line-through;
+  color: #888 !important;
+  text-decoration: line-through !important;
   font-size: 0.9rem;
   margin: 0;
+}
+
+.product-card .original-price {
+  color: #888 !important;
+  text-decoration: line-through !important;
+}
+
+.product-detail .original-price {
+  color: #888 !important;
+  text-decoration: line-through !important;
 }
 
 .discount-price {
@@ -615,6 +625,7 @@ footer {
 .product-detail__price-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   margin: 0.5rem 0 1.5rem;
 }
