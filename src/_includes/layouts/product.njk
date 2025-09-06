@@ -71,8 +71,8 @@ layout: layouts/base.njk
   
   {% if category %}
     <p class="product-detail__category">
-      <span class="category-label">{% if category.length > 1 %}Categorías:{% else %}Categoría:{% endif %}</span>
-      {% if category.length %}
+      <span class="category-label">{% if category.constructor.name == 'Array' and category.length > 1 %}Categorías:{% else %}Categoría:{% endif %}</span>
+      {% if category.constructor.name == 'Array' %}
         {# Manejar array de categorías #}
         {% for cat in category %}
           {% if cat == "ofertas" %}
