@@ -76,7 +76,7 @@ layout: layouts/base.njk
         {# Manejar array de categorías #}
         {% for cat in category %}
           {% if cat == "ofertas" %}
-            <a href="/products/" class="category-link">{{ cat | getCategoryLabel }}</a>
+            <a href="https://catalog-demo.netlify.app/#ofertas" class="category-link">{{ cat | getCategoryLabel }}</a>
           {% else %}
             <a href="/#{{ cat }}" class="category-link">{{ cat | getCategoryLabel }}</a>
           {% endif %}
@@ -84,7 +84,7 @@ layout: layouts/base.njk
       {% else %}
         {# Manejar categoría simple (string) #}
         {% if category == "ofertas" %}
-          <a href="/products/" class="category-link">{{ category | getCategoryLabel }}</a>
+          <a href="https://catalog-demo.netlify.app/#ofertas" class="category-link">{{ category | getCategoryLabel }}</a>
         {% else %}
           <a href="/#{{ category }}" class="category-link">{{ category | getCategoryLabel }}</a>
         {% endif %}
