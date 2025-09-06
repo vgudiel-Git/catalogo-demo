@@ -11,6 +11,7 @@ module.exports = function(eleventyConfig) {
   
   // Definir categorías como datos globales
   const categoriesData = [
+    { label: "Ofertas", value: "ofertas" },
     { label: "Ropa & Calzado", value: "ropa-calzado" },
     { label: "Accesorios", value: "accesorios" },
     { label: "Mascotas", value: "mascotas" },
@@ -29,7 +30,12 @@ module.exports = function(eleventyConfig) {
   categoriesData.forEach(category => {
     eleventyConfig.addCollection(`category-${category.value}`, function(collectionApi) {
       return collectionApi.getFilteredByGlob("src/products/*.{md,html}").filter(item => {
-        return item.data.category === category.value;
+        const itemCategory = item.data.category;
+        // Manejar tanto strings como arrays de categorías
+        if (Array.isArray(itemCategory)) {
+          return itemCategory.includes(category.value);
+        }
+        return itemCategory === category.value;
       });
     });
   });

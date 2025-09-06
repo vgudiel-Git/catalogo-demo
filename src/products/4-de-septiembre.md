@@ -1,7 +1,7 @@
 ---
 title: 4 de septiembre
 price: 3000
-category: mascotas
+category: ["ofertas", "mascotas"]
 discount: "20"
 images:
   - image: /assets/images/pexels-fauxels-3183150.jpg

@@ -1,7 +1,7 @@
 ---
 title: Prueba de OFERTAS
 price: 2000
-category: deportes
+category: ["ofertas", "deportes"]
 discount: "30"
 images:
   - image: /assets/images/product4.jpg

@@ -61,8 +61,8 @@ layout: layouts/base.njk
     {% set discountPrice = price | calculateDiscountPrice(discount, discountPrice) %}
     {% if discountPrice %}
       <div class="product-detail__price-container">
-        <p class="product-detail__price original-price">Q{{ price | formatPrice }}</p>
         <p class="product-detail__price discount-price">Q{{ discountPrice | formatPrice }}</p>
+        <p class="product-detail__price original-price">Q{{ price | formatPrice }}</p>
       </div>
     {% else %}
       <p class="product-detail__price">Q{{ price | formatPrice }}</p>

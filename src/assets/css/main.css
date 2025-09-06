@@ -106,8 +106,29 @@ header nav a {
 .categories-link {
   color: white;
   text-decoration: none;
-  padding: 0.75rem 1.25rem;
-  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  background: linear-gradient(45deg, #ff6b6b, #ffa500, #ff6b6b);
+  background-size: 200% 200%;
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+  transition: all 0.3s ease;
+  animation: gradient-shift 3s ease infinite;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+.categories-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+  background: linear-gradient(45deg, #ff5252, #ff9800, #ff5252);
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .hamburger-button {
@@ -496,6 +517,15 @@ footer {
 }
 
 /* --- Responsive adjustments header/menu --- */
+/* Menús desktop y móvil */
+.desktop-menu {
+  display: block;
+}
+
+.mobile-menu {
+  display: none;
+}
+
 @media (max-width: 768px) {
   /* On mobile, the menu is triggered by the hamburger, not the hidden desktop link */
   .main-menu {
@@ -509,6 +539,15 @@ footer {
     right: 0;
     left: auto;
     width: 250px;
+  }
+
+  /* Ocultar menú desktop y mostrar menú móvil */
+  .desktop-menu {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
   }
 }
 

@@ -13,15 +13,31 @@
       <nav>
         <ul class="main-menu">
           <li class="dropdown">
-            <a href="#" class="categories-link" onclick="event.preventDefault(); return false;">Categorías</a>
+            <a href="#" class="categories-link" onclick="event.preventDefault(); return false;">Ofertas del Mes</a>
             <ul class="dropdown-menu categories-menu">
-              {% for category in categories %}
+              <!-- Menú completo para desktop -->
+              <div class="desktop-menu">
                 <li>
-                  <a href="/#{{ category.value }}" class="category-link">
-                    {{ category.label }}
+                  <a href="/#ofertas" class="category-link">
+                    Ofertas del Mes
                   </a>
                 </li>
-              {% endfor %}
+                {% for category in categories %}
+                  <li>
+                    <a href="/#{{ category.value }}" class="category-link">
+                      {{ category.label }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </div>
+              <!-- Menú simplificado para móvil -->
+              <div class="mobile-menu">
+                <li>
+                  <a href="/#ofertas" class="category-link">
+                    Ofertas del Mes
+                  </a>
+                </li>
+              </div>
             </ul>
           </li>
         </ul>

@@ -1,7 +1,7 @@
 ---
 title: nice nice
 price: 2244
-category: hogar
+category: ["ofertas", "hogar"]
 discount: "10"
 images:
   - image: /assets/images/product4.jpg

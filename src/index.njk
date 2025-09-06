@@ -42,8 +42,8 @@ layout: layouts/base.njk
           {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}
           {% if discountPrice %}
             <div class="price-container">
-              <p class="price original-price">Q{{ product.data.price | formatPrice }}</p>
               <p class="price discount-price">Q{{ discountPrice | formatPrice }}</p>
+              <p class="price original-price">Q{{ product.data.price | formatPrice }}</p>
             </div>
           {% else %}
             <p class="price">Q{{ product.data.price | formatPrice }}</p>
@@ -91,8 +91,8 @@ layout: layouts/base.njk
               {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}
               {% if discountPrice %}
                 <div class="price-container">
-                  <p class="price original-price">Q{{ product.data.price | formatPrice }}</p>
                   <p class="price discount-price">Q{{ discountPrice | formatPrice }}</p>
+                  <p class="price original-price">Q{{ product.data.price | formatPrice }}</p>
                 </div>
               {% else %}
                 <p class="price">Q{{ product.data.price | formatPrice }}</p>

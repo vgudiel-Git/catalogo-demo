@@ -1,7 +1,7 @@
 ---
 title: Prueba de Oro
 price: 4400
-category: electrodomesticos
+category: ["ofertas", "electrodomesticos"]
 discount: "20"
 images:
   - image: /assets/images/product3.jpg
