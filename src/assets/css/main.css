@@ -103,7 +103,8 @@ header nav a {
   display: block;
 }
 
-.categories-link {
+/* Estilos para los botones de ofertas */
+.ofertas-button {
   color: white;
   text-decoration: none;
   padding: 0.75rem 1.5rem;
@@ -117,9 +118,10 @@ header nav a {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 0.9rem;
+  display: inline-block;
 }
 
-.categories-link:hover {
+.ofertas-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
   background: linear-gradient(45deg, #ff5252, #ff9800, #ff5252);
@@ -131,65 +133,32 @@ header nav a {
   100% { background-position: 0% 50%; }
 }
 
-.hamburger-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  display: flex; /* Shown on mobile */
-  flex-direction: column;
-  justify-content: space-around;
-  width: 30px;
-  height: 30px;
+/* Mostrar solo el botón de desktop en pantallas grandes */
+.desktop-ofertas {
+  display: block;
 }
 
-.hamburger-bar {
-  width: 100%;
-  height: 3px;
-  background-color: white;
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+.mobile-ofertas {
+  display: none;
 }
 
-/* Animación del botón hamburguesa */
-.hamburger-button.active .hamburger-bar:nth-child(1) {
-  transform: translateY(10px) rotate(45deg);
-}
-
-.hamburger-button.active .hamburger-bar:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger-button.active .hamburger-bar:nth-child(3) {
-  transform: translateY(-10px) rotate(-45deg);
-}
-
-@media (min-width: 769px) {
-  .hamburger-button {
+/* Mostrar solo el botón móvil en pantallas pequeñas */
+@media (max-width: 768px) {
+  .desktop-ofertas {
     display: none;
   }
+  
+  .mobile-ofertas {
+    display: block;
+  }
 }
 
-/* Estilos para dispositivos móviles */
+/* Estilos del hamburger button removidos - ya no se usa */
+
+/* Estilos móviles simplificados */
 @media (max-width: 768px) {
-  .dropdown-menu {
-    position: fixed;
-    top: 70px; /* Ajustar según la altura del header */
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-width: 100%;
-    border-radius: 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  }
-  
   .main-menu {
     justify-content: flex-end;
-  }
-  
-  /* Ocultar el botón de categorías en móvil, solo mostrar hamburguesa */
-  .categories-link {
-    display: none;
   }
 }
 

@@ -12,41 +12,16 @@
       <h1><a href="/">Mi Catálogo</a></h1>
       <nav>
         <ul class="main-menu">
-          <li class="dropdown">
-            <a href="#" class="categories-link" onclick="event.preventDefault(); return false;">Ofertas del Mes</a>
-            <ul class="dropdown-menu categories-menu">
-              <!-- Menú completo para desktop -->
-              <div class="desktop-menu">
-                <li>
-                  <a href="/#ofertas" class="category-link">
-                    Ofertas del Mes
-                  </a>
-                </li>
-                {% for category in categories %}
-                  <li>
-                    <a href="/#{{ category.value }}" class="category-link">
-                      {{ category.label }}
-                    </a>
-                  </li>
-                {% endfor %}
-              </div>
-              <!-- Menú simplificado para móvil -->
-              <div class="mobile-menu">
-                <li>
-                  <a href="/#ofertas" class="category-link">
-                    Ofertas del Mes
-                  </a>
-                </li>
-              </div>
-            </ul>
+          <!-- Botón directo para desktop -->
+          <li class="desktop-ofertas">
+            <a href="https://catalog-demo.netlify.app/#ofertas" class="ofertas-button desktop-button">Ofertas del Mes</a>
+          </li>
+          <!-- Botón directo para móvil/tablet -->
+          <li class="mobile-ofertas">
+            <a href="https://catalog-demo.netlify.app/#ofertas" class="ofertas-button mobile-button">Ofertas</a>
           </li>
         </ul>
       </nav>
-      <button class="hamburger-button" aria-label="Toggle Menu">
-        <span class="hamburger-bar"></span>
-        <span class="hamburger-bar"></span>
-        <span class="hamburger-bar"></span>
-      </button>
     </div>
   </header>
 
@@ -73,41 +48,7 @@
   </script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const categoriesLink = document.querySelector('.categories-link');
-      const hamburgerButton = document.querySelector('.hamburger-button');
-      const categoriesMenu = document.querySelector('.categories-menu');
-
-      const toggleCategoriesMenu = (event) => {
-        event.stopPropagation(); // Prevent this click from immediately closing the menu
-        categoriesMenu.classList.toggle('open');
-        hamburgerButton.classList.toggle('active');
-      };
-
-      // Event listeners for both buttons
-      categoriesLink.addEventListener('click', toggleCategoriesMenu);
-      hamburgerButton.addEventListener('click', toggleCategoriesMenu);
-
-      // Close the menu if the user clicks anywhere else on the page
-      document.addEventListener('click', (event) => {
-        if (categoriesMenu.classList.contains('open') && 
-            !categoriesMenu.contains(event.target) && 
-            event.target !== categoriesLink && 
-            event.target !== hamburgerButton) {
-          categoriesMenu.classList.remove('open');
-          hamburgerButton.classList.remove('active');
-        }
-      });
-
-      // Cerrar el menú después de hacer clic en un enlace de categoría
-      const categoryLinks = document.querySelectorAll('.category-link');
-      categoryLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          categoriesMenu.classList.remove('open');
-          hamburgerButton.classList.remove('active');
-        });
-      });
-    });
+    // No JavaScript needed for direct links
   </script>
 </body>
 </html>
