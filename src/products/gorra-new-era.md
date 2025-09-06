@@ -1,7 +1,8 @@
 ---
 title: Gorra New Era
 price: 350
-category: accesorios
+category:
+  - accesorios
 discount: "30"
 images:
   - image: /assets/images/gorras-new-era.jpeg
