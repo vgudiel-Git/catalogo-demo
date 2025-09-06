@@ -71,8 +71,24 @@ layout: layouts/base.njk
   
   {% if category %}
     <p class="product-detail__category">
-      <span class="category-label">Categoría:</span>
-      <a href="/#{{ category }}" class="category-link">{{ category | getCategoryLabel }}</a>
+      <span class="category-label">{% if category.length > 1 %}Categorías:{% else %}Categoría:{% endif %}</span>
+      {% if category.length %}
+        {# Manejar array de categorías #}
+        {% for cat in category %}
+          {% if cat == "ofertas" %}
+            <a href="/products/" class="category-link">{{ cat | getCategoryLabel }}</a>
+          {% else %}
+            <a href="/#{{ cat }}" class="category-link">{{ cat | getCategoryLabel }}</a>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {# Manejar categoría simple (string) #}
+        {% if category == "ofertas" %}
+          <a href="/products/" class="category-link">{{ category | getCategoryLabel }}</a>
+        {% else %}
+          <a href="/#{{ category }}" class="category-link">{{ category | getCategoryLabel }}</a>
+        {% endif %}
+      {% endif %}
     </p>
   {% endif %}
 
