@@ -71,20 +71,20 @@ layout: layouts/base.njk
   
   {% if category %}
     <p class="product-detail__category">
-      <span class="category-label">{% if category.constructor.name == 'Array' and category.length > 1 %}Categorías:{% else %}Categoría:{% endif %}</span>
-      {% if category.constructor.name == 'Array' %}
+      <span class="category-label">{% if category | length > 1 %}Categorías:{% else %}Categoría:{% endif %}</span>
+      {% if category | length %}
         {# Manejar array de categorías #}
         {% for cat in category %}
           {% if cat == "ofertas" %}
-            <a href="https://catalog-demo.netlify.app/#ofertas" class="category-link">{{ cat | getCategoryLabel }}</a>
+            <a href="/#ofertas" class="category-link">{{ cat | getCategoryLabel }}</a>
           {% else %}
             <a href="/#{{ cat }}" class="category-link">{{ cat | getCategoryLabel }}</a>
-          {% endif %}
+          {% endif %}{% if not loop.last %} {% endif %}
         {% endfor %}
       {% else %}
         {# Manejar categoría simple (string) #}
         {% if category == "ofertas" %}
-          <a href="https://catalog-demo.netlify.app/#ofertas" class="category-link">{{ category | getCategoryLabel }}</a>
+          <a href="/#ofertas" class="category-link">{{ category | getCategoryLabel }}</a>
         {% else %}
           <a href="/#{{ category }}" class="category-link">{{ category | getCategoryLabel }}</a>
         {% endif %}
