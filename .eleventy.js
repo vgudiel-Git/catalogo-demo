@@ -82,22 +82,7 @@ module.exports = function(eleventyConfig) {
     return null;
   });
   
-  // Añadir filtro para obtener la etiqueta de una categoría por su valor
-  eleventyConfig.addNunjucksFilter("getCategoryLabel", function(categoryValue) {
-    const categories = [
-      { label: "Ropa & Calzado", value: "ropa-calzado" },
-      { label: "Accesorios", value: "accesorios" },
-      { label: "Mascotas", value: "mascotas" },
-      { label: "Hogar", value: "hogar" },
-      { label: "Electrodomésticos", value: "electrodomesticos" },
-      { label: "Juguetes", value: "juguetes" },
-      { label: "Deportes", value: "deportes" },
-      { label: "Tecnología", value: "tecnologia" },
-      { label: "Temporada", value: "temporada" }
-    ];
-    const category = categories.find(cat => cat.value === categoryValue);
-    return category ? category.label : categoryValue;
-  });
+  // Filtro duplicado eliminado - se usa el definido arriba que incluye todas las categorías
 
   // Enforce unique permalink for all product files
   eleventyConfig.addGlobalData("eleventyComputed", {

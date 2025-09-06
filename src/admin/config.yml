@@ -43,6 +43,7 @@ collections:
         name: "category"
         widget: "select"
         options:
+          - { label: "Ofertas", value: "ofertas" }
           - { label: "Ropa & Calzado", value: "ropa-calzado" }
           - { label: "Accesorios", value: "accesorios" }
           - { label: "Mascotas", value: "mascotas" }

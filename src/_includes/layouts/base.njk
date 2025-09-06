@@ -48,7 +48,36 @@
   </script>
 
   <script>
-    // No JavaScript needed for direct links
+    // Manejar clics en los botones de ofertas del header
+    document.addEventListener('DOMContentLoaded', function() {
+      const ofertasButtons = document.querySelectorAll('.ofertas-button');
+      
+      ofertasButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Activar la pestaña de ofertas
+          const categoryLinks = document.querySelectorAll('.category-nav a');
+          const categorySections = document.querySelectorAll('.category-section');
+          
+          // Eliminar la clase active de todos los enlaces y secciones
+          categoryLinks.forEach(l => l.classList.remove('active'));
+          categorySections.forEach(s => s.classList.remove('active'));
+          
+          // Activar la pestaña de ofertas
+          const ofertasLink = document.querySelector('.category-nav a[href="#ofertas"]');
+          const ofertasSection = document.getElementById('ofertas');
+          
+          if (ofertasLink && ofertasSection) {
+            ofertasLink.classList.add('active');
+            ofertasSection.classList.add('active');
+            
+            // Scroll suave hacia la sección
+            ofertasSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>
