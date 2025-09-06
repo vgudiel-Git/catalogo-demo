@@ -32,7 +32,11 @@ layout: layouts/base.njk
           {% endif %}
           {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}
           {% if discountPrice %}
-            <span class="offer-badge">Oferta</span>
+            {% if product.data.discount == 'custom' %}
+              <span class="offer-badge">Oferta</span>
+            {% else %}
+              <span class="offer-badge">Descuento {{ product.data.discount }}%</span>
+            {% endif %}
           {% endif %}
           <h3>{{ product.data.title }}</h3>
           {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}
@@ -43,9 +47,6 @@ layout: layouts/base.njk
             </div>
           {% else %}
             <p class="price">Q{{ product.data.price | formatPrice }}</p>
-          {% endif %}
-          {% if product.data.category %}
-            <span class="product-category">{{ product.data.category | getCategoryLabel }}</span>
           {% endif %}
         </a>
         <a class="btn-whatsapp" href="https://wa.me/16263941200?text=Hola, me interesa el producto: {{ product.data.title }}" target="_blank" rel="noopener">
@@ -80,7 +81,11 @@ layout: layouts/base.njk
               {% endif %}
               {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}
               {% if discountPrice %}
-                <span class="offer-badge">Oferta</span>
+                {% if product.data.discount == 'custom' %}
+                  <span class="offer-badge">Oferta</span>
+                {% else %}
+                  <span class="offer-badge">Descuento {{ product.data.discount }}%</span>
+                {% endif %}
               {% endif %}
               <h3>{{ product.data.title }}</h3>
               {% set discountPrice = product.data.price | calculateDiscountPrice(product.data.discount, product.data.discountPrice) %}

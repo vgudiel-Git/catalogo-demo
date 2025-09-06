@@ -14,6 +14,16 @@ layout: layouts/base.njk
             {# Legacy format: images array with strings #}
             <img class="product-detail__img" src="{{ img }}" alt="{{ title + ' - Imagen ' + loop.index }}">
           {% endif %}
+          {% if loop.first %}
+            {% set discountPrice = price | calculateDiscountPrice(discount, discountPrice) %}
+            {% if discountPrice %}
+              {% if discount == 'custom' %}
+                <span class="offer-badge">Oferta</span>
+              {% else %}
+                <span class="offer-badge">Descuento {{ discount }}%</span>
+              {% endif %}
+            {% endif %}
+          {% endif %}
         </div>
       {% endfor %}
     </div>
@@ -22,10 +32,26 @@ layout: layouts/base.njk
   {% elif image %}
     <div class="gallery-item">
       <img class="product-detail__img" src="{{ image }}" alt="{{ title }}">
+      {% set discountPrice = price | calculateDiscountPrice(discount, discountPrice) %}
+      {% if discountPrice %}
+        {% if discount == 'custom' %}
+          <span class="offer-badge">Oferta</span>
+        {% else %}
+          <span class="offer-badge">Descuento {{ discount }}%</span>
+        {% endif %}
+      {% endif %}
     </div>
   {% else %}
     <div class="gallery-item">
       <img class="product-detail__img" src="/assets/images/default.jpg" alt="{{ title }}">
+      {% set discountPrice = price | calculateDiscountPrice(discount, discountPrice) %}
+      {% if discountPrice %}
+        {% if discount == 'custom' %}
+          <span class="offer-badge">Oferta</span>
+        {% else %}
+          <span class="offer-badge">Descuento {{ discount }}%</span>
+        {% endif %}
+      {% endif %}
     </div>
   {% endif %}
 
