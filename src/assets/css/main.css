@@ -119,6 +119,10 @@ header nav a {
   letter-spacing: 0.5px;
   font-size: 0.9rem;
   display: inline-block;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
 }
 
 .ofertas-button:hover {
@@ -142,7 +146,9 @@ header nav a {
   display: none;
 }
 
-/* Mostrar solo el botón móvil en pantallas pequeñas */
+/* Estilos del hamburger button removidos - ya no se usa */
+
+/* Estilos móviles simplificados */
 @media (max-width: 768px) {
   .desktop-ofertas {
     display: none;
@@ -151,12 +157,7 @@ header nav a {
   .mobile-ofertas {
     display: block;
   }
-}
-
-/* Estilos del hamburger button removidos - ya no se usa */
-
-/* Estilos móviles simplificados */
-@media (max-width: 768px) {
+  
   .main-menu {
     justify-content: flex-end;
   }
