@@ -4,9 +4,31 @@ module.exports = function(eleventyConfig) {
   // Copy admin folder to _site
   eleventyConfig.addPassthroughCopy("src/admin");
 
-  // Create products collection
+  // Create products collection with automatic 'ofertas' category for discounted products
   eleventyConfig.addCollection("products", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/products/*.{md,html}");
+    const products = collectionApi.getFilteredByGlob("src/products/*.{md,html}");
+    
+    // Process each product to add 'ofertas' category if it has discount
+    products.forEach(product => {
+      const discount = product.data.discount;
+      let category = product.data.category;
+      
+      // If product has discount and it's not 'none'
+      if (discount && discount !== 'none') {
+        // Ensure category is an array
+        if (!Array.isArray(category)) {
+          category = category ? [category] : [];
+        }
+        
+        // Add 'ofertas' if not already present
+        if (!category.includes('ofertas')) {
+          category.unshift('ofertas'); // Add at the beginning
+          product.data.category = category;
+        }
+      }
+    });
+    
+    return products;
   });
   
   // Definir categorías como datos globales

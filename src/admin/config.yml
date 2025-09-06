@@ -42,6 +42,7 @@ collections:
       - label: "Categoría"
         name: "category"
         widget: "select"
+        multiple: true
         options:
           - { label: "Ofertas", value: "ofertas" }
           - { label: "Ropa & Calzado", value: "ropa-calzado" }
@@ -53,6 +54,7 @@ collections:
           - { label: "Deportes", value: "deportes" }
           - { label: "Tecnología", value: "tecnologia" }
           - { label: "Temporada", value: "temporada" }
+        hint: "Selecciona una o más categorías. Si el producto tiene descuento, se agregará automáticamente a 'Ofertas'"
       - label: "Productos en Oferta"
         name: "discount"
         widget: "select"
