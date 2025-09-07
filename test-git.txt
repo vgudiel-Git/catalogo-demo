@@ -1,0 +1,2 @@
+Archivo de prueba para verificar el funcionamiento de Git
+Fecha: $(Get-Date)
