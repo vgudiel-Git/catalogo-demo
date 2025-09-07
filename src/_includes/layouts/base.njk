@@ -14,11 +14,11 @@
         <ul class="main-menu">
           <!-- Botón directo para desktop -->
           <li class="desktop-ofertas">
-            <a href="/#ofertas" class="ofertas-button desktop-button">Ofertas del Mes</a>
+            <a href="/index.html#ofertas" class="ofertas-button desktop-button">Ofertas del Mes</a>
           </li>
           <!-- Botón directo para móvil/tablet -->
           <li class="mobile-ofertas">
-            <a href="/#ofertas" class="ofertas-button mobile-button">Ofertas</a>
+            <a href="/index.html#ofertas" class="ofertas-button mobile-button">Ofertas</a>
           </li>
         </ul>
       </nav>
@@ -54,27 +54,34 @@
       
       ofertasButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          // Activar la pestaña de ofertas
+          // Verificar si estamos en la página principal
           const categoryLinks = document.querySelectorAll('.category-nav a');
-          const categorySections = document.querySelectorAll('.category-section');
-          
-          // Eliminar la clase active de todos los enlaces y secciones
-          categoryLinks.forEach(l => l.classList.remove('active'));
-          categorySections.forEach(s => s.classList.remove('active'));
-          
-          // Activar la pestaña de ofertas
-          const ofertasLink = document.querySelector('.category-nav a[href="#ofertas"]');
           const ofertasSection = document.getElementById('ofertas');
           
-          if (ofertasLink && ofertasSection) {
-            ofertasLink.classList.add('active');
-            ofertasSection.classList.add('active');
+          // Si estamos en la página principal (tiene navegación de categorías y sección ofertas)
+          if (categoryLinks.length > 0 && ofertasSection) {
+            e.preventDefault();
             
-            // Scroll suave hacia la sección
-            ofertasSection.scrollIntoView({ behavior: 'smooth' });
+            // Activar la pestaña de ofertas
+            const categorySections = document.querySelectorAll('.category-section');
+            
+            // Eliminar la clase active de todos los enlaces y secciones
+            categoryLinks.forEach(l => l.classList.remove('active'));
+            categorySections.forEach(s => s.classList.remove('active'));
+            
+            // Activar la pestaña de ofertas
+            const ofertasLink = document.querySelector('.category-nav a[href="#ofertas"]');
+            
+            if (ofertasLink && ofertasSection) {
+              ofertasLink.classList.add('active');
+              ofertasSection.classList.add('active');
+              
+              // Scroll suave hacia la sección
+              ofertasSection.scrollIntoView({ behavior: 'smooth' });
+            }
           }
+          // Si no estamos en la página principal, dejar que el enlace funcione normalmente
+          // (no hacer preventDefault, permitir la navegación a /index.html#ofertas)
         });
       });
     });
