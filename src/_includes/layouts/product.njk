@@ -125,14 +125,76 @@ layout: layouts/base.njk
   </p>
 </article>
 
+<!-- Modal Lightbox para galería de imágenes -->
+<div id="lightboxModal" class="lightbox-modal">
+  <div class="lightbox-overlay"></div>
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    
+    <!-- Navegación izquierda -->
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    
+    <!-- Imagen principal del lightbox -->
+    <div class="lightbox-image-container">
+      <img id="lightboxImage" class="lightbox-image" src="" alt="">
+    </div>
+    
+    <!-- Navegación derecha -->
+    <button class="lightbox-nav lightbox-next" id="lightboxNext">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    
+    <!-- Contador de imágenes -->
+    <div class="lightbox-counter">
+      <span id="lightboxCounter">1 / 1</span>
+    </div>
+  </div>
+</div>
+
 <script>
-// Funcionalidad de galería de imágenes
+// Funcionalidad de galería de imágenes y lightbox
 document.addEventListener('DOMContentLoaded', function() {
   const thumbnails = document.querySelectorAll('.thumbnail-item');
   const mainImage = document.getElementById('mainImage');
+  const lightboxModal = document.getElementById('lightboxModal');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const lightboxOverlay = document.querySelector('.lightbox-overlay');
   
+  // Array de todas las imágenes disponibles
+  let allImages = [];
+  let currentImageIndex = 0;
+  
+  // Recopilar todas las imágenes (principal + thumbnails)
+  if (mainImage) {
+    allImages.push({
+      src: mainImage.src,
+      alt: mainImage.alt
+    });
+  }
+  
+  thumbnails.forEach(function(thumbnail, index) {
+    const img = thumbnail.querySelector('.thumbnail-image');
+    if (img && index > 0) { // Saltar el primer thumbnail ya que es la imagen principal
+      allImages.push({
+        src: img.src,
+        alt: img.alt
+      });
+    }
+  });
+  
+  // Funcionalidad de thumbnails (cambiar imagen principal)
   if (thumbnails.length > 0 && mainImage) {
-    thumbnails.forEach(function(thumbnail) {
+    thumbnails.forEach(function(thumbnail, index) {
       thumbnail.addEventListener('click', function() {
         // Remover clase active de todos los thumbnails
         thumbnails.forEach(function(thumb) {
@@ -147,9 +209,88 @@ document.addEventListener('DOMContentLoaded', function() {
         if (thumbnailImg) {
           mainImage.src = thumbnailImg.src;
           mainImage.alt = thumbnailImg.alt.replace('Thumbnail', 'Imagen principal');
+          currentImageIndex = index;
         }
       });
     });
   }
+  
+  // Abrir lightbox al hacer clic en la imagen principal
+  if (mainImage && lightboxModal) {
+    mainImage.addEventListener('click', function() {
+      openLightbox(currentImageIndex);
+    });
+  }
+  
+  // Función para abrir el lightbox
+  function openLightbox(imageIndex) {
+    if (allImages.length === 0) return;
+    
+    currentImageIndex = imageIndex;
+    updateLightboxImage();
+    lightboxModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  
+  // Función para actualizar la imagen del lightbox
+  function updateLightboxImage() {
+    if (allImages[currentImageIndex]) {
+      lightboxImage.src = allImages[currentImageIndex].src;
+      lightboxImage.alt = allImages[currentImageIndex].alt;
+      lightboxCounter.textContent = `${currentImageIndex + 1} / ${allImages.length}`;
+      
+      // Mostrar/ocultar botones de navegación
+      lightboxPrev.style.display = allImages.length > 1 ? 'flex' : 'none';
+      lightboxNext.style.display = allImages.length > 1 ? 'flex' : 'none';
+    }
+  }
+  
+  // Cerrar lightbox
+  function closeLightbox() {
+    lightboxModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+  
+  // Navegación anterior
+  function prevImage() {
+    currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : allImages.length - 1;
+    updateLightboxImage();
+  }
+  
+  // Navegación siguiente
+  function nextImage() {
+    currentImageIndex = currentImageIndex < allImages.length - 1 ? currentImageIndex + 1 : 0;
+    updateLightboxImage();
+  }
+  
+  // Event listeners para el lightbox
+  if (lightboxClose) {
+    lightboxClose.addEventListener('click', closeLightbox);
+  }
+  
+  if (lightboxOverlay) {
+    lightboxOverlay.addEventListener('click', closeLightbox);
+  }
+  
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', prevImage);
+  }
+  
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', nextImage);
+  }
+  
+  // Navegación con teclado
+  document.addEventListener('keydown', function(e) {
+    if (lightboxModal.style.display === 'flex') {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        prevImage();
+      } else if (e.key === 'ArrowRight') {
+        nextImage();
+      }
+    }
+  });
 });
 </script>
