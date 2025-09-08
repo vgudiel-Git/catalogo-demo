@@ -329,6 +329,12 @@ main {
   color: inherit;
   backdrop-filter: blur(10px);
   position: relative;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .product-card a {
