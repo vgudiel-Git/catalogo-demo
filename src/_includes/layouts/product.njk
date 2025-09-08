@@ -2,56 +2,73 @@
 layout: layouts/base.njk
 ---
 <article class="product-detail">
-  {# Galería de varias imágenes - New format with objects #}
+  {# Galería de imágenes con imagen principal y thumbnails #}
   {% if images and (images | length) > 0 %}
-    <div class="product-gallery" data-image-count="{{ images | length }}">
-      {% for img in images %}
-        <div class="gallery-item">
-          {% if img.image %}
-            {# New format: images array with objects #}
-            <img class="product-detail__img" src="{{ img.image }}" alt="{{ img.alt or (title + ' - Imagen ' + loop.index) }}">
+    <div class="product-image-gallery">
+      {# Imagen principal #}
+      <div class="main-image-container">
+        {% set firstImg = images[0] %}
+        {% if firstImg.image %}
+          <img id="mainImage" class="main-product-image" src="{{ firstImg.image }}" alt="{{ firstImg.alt or (title + ' - Imagen principal') }}">
+        {% else %}
+          <img id="mainImage" class="main-product-image" src="{{ firstImg }}" alt="{{ title + ' - Imagen principal' }}">
+        {% endif %}
+        
+        {# Badge de oferta solo en la imagen principal #}
+        {% set discountPrice = price | calculateDiscountPrice(discount, discountPrice) %}
+        {% if discountPrice %}
+          {% if discount == 'custom' %}
+            <span class="offer-badge">Oferta</span>
           {% else %}
-            {# Legacy format: images array with strings #}
-            <img class="product-detail__img" src="{{ img }}" alt="{{ title + ' - Imagen ' + loop.index }}">
+            <span class="offer-badge">Descuento {{ discount }}%</span>
           {% endif %}
-          {% if loop.first %}
-            {% set discountPrice = price | calculateDiscountPrice(discount, discountPrice) %}
-            {% if discountPrice %}
-              {% if discount == 'custom' %}
-                <span class="offer-badge">Oferta</span>
+        {% endif %}
+      </div>
+      
+      {# Thumbnails - solo si hay más de una imagen #}
+      {% if images | length > 1 %}
+        <div class="thumbnail-container">
+          {% for img in images %}
+            <div class="thumbnail-item {{ 'active' if loop.first }}" data-index="{{ loop.index0 }}">
+              {% if img.image %}
+                <img class="thumbnail-image" src="{{ img.image }}" alt="{{ img.alt or (title + ' - Thumbnail ' + loop.index) }}">
               {% else %}
-                <span class="offer-badge">Descuento {{ discount }}%</span>
+                <img class="thumbnail-image" src="{{ img }}" alt="{{ title + ' - Thumbnail ' + loop.index }}">
               {% endif %}
-            {% endif %}
-          {% endif %}
+            </div>
+          {% endfor %}
         </div>
-      {% endfor %}
+      {% endif %}
     </div>
 
   {# Imagen única (legacy) #}
   {% elif image %}
-    <div class="gallery-item">
-      <img class="product-detail__img" src="{{ image }}" alt="{{ title }}">
-      {% set discountPrice = price | calculateDiscountPrice(discount, discountPrice) %}
-      {% if discountPrice %}
-        {% if discount == 'custom' %}
-          <span class="offer-badge">Oferta</span>
-        {% else %}
-          <span class="offer-badge">Descuento {{ discount }}%</span>
+    <div class="product-image-gallery">
+      <div class="main-image-container">
+        <img id="mainImage" class="main-product-image" src="{{ image }}" alt="{{ title }}">
+        {% set discountPrice = price | calculateDiscountPrice(discount, discountPrice) %}
+        {% if discountPrice %}
+          {% if discount == 'custom' %}
+            <span class="offer-badge">Oferta</span>
+          {% else %}
+            <span class="offer-badge">Descuento {{ discount }}%</span>
+          {% endif %}
         {% endif %}
-      {% endif %}
+      </div>
     </div>
   {% else %}
-    <div class="gallery-item">
-      <img class="product-detail__img" src="/assets/images/default.jpg" alt="{{ title }}">
-      {% set discountPrice = price | calculateDiscountPrice(discount, discountPrice) %}
-      {% if discountPrice %}
-        {% if discount == 'custom' %}
-          <span class="offer-badge">Oferta</span>
-        {% else %}
-          <span class="offer-badge">Descuento {{ discount }}%</span>
+    <div class="product-image-gallery">
+      <div class="main-image-container">
+        <img id="mainImage" class="main-product-image" src="/assets/images/default.jpg" alt="{{ title }}">
+        {% set discountPrice = price | calculateDiscountPrice(discount, discountPrice) %}
+        {% if discountPrice %}
+          {% if discount == 'custom' %}
+            <span class="offer-badge">Oferta</span>
+          {% else %}
+            <span class="offer-badge">Descuento {{ discount }}%</span>
+          {% endif %}
         {% endif %}
-      {% endif %}
+      </div>
     </div>
   {% endif %}
 
@@ -107,3 +124,32 @@ layout: layouts/base.njk
     </a>
   </p>
 </article>
+
+<script>
+// Funcionalidad de galería de imágenes
+document.addEventListener('DOMContentLoaded', function() {
+  const thumbnails = document.querySelectorAll('.thumbnail-item');
+  const mainImage = document.getElementById('mainImage');
+  
+  if (thumbnails.length > 0 && mainImage) {
+    thumbnails.forEach(function(thumbnail) {
+      thumbnail.addEventListener('click', function() {
+        // Remover clase active de todos los thumbnails
+        thumbnails.forEach(function(thumb) {
+          thumb.classList.remove('active');
+        });
+        
+        // Agregar clase active al thumbnail clickeado
+        this.classList.add('active');
+        
+        // Cambiar la imagen principal
+        const thumbnailImg = this.querySelector('.thumbnail-image');
+        if (thumbnailImg) {
+          mainImage.src = thumbnailImg.src;
+          mainImage.alt = thumbnailImg.alt.replace('Thumbnail', 'Imagen principal');
+        }
+      });
+    });
+  }
+});
+</script>
